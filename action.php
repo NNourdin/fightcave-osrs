@@ -36,11 +36,6 @@ if(isset($_POST)) {
         $wave = 3;
         $start = $_POST['second'] + 2;
 
-        if($_POST['extra'] == 'true') {
-            $wave = 3;
-            $start = $_POST['second'] + 2;
-        }
-
         $rotation = new Rotation($start, $wave);
         $rotation->arrayBuilder();
         $result = $rotation->build();

@@ -55,9 +55,9 @@ label {
 }
 #map-wrapper .spawn {
     position: absolute;
-    height: 11%;
+    height: auto;
     width: 11%;
-    text-align: center;
+    display: inline-flex;
 }
 #map-wrapper .spawn img {
     margin-top: -3px;
@@ -81,6 +81,13 @@ label {
 #map-wrapper .se {
     top: 55%;
     left: 80%;
+}
+#map-wrapper .monster-wrapper {
+    text-align: center;
+    padding-right: 2%;
+}
+#map-wrapper .multi {
+    width: 18%;
 }
 #map-wrapper #wave {
     position: absolute;

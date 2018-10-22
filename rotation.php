@@ -45,7 +45,7 @@ class Rotation {
     public $data = array();
 
     /**
-     * Array to hold our temp wave data
+     * Array where we hold our temporarily wave data
      *
      * @var array
      */
@@ -100,7 +100,7 @@ class Rotation {
         return array('name' => 'Tz-Kih', 'level' => 22);
     }
 
-    private function generateData($start, $i = 0)
+    private function buildWaves($start, $i = 0)
     {
         $this->altWave = $this->wave;
         $this->temp = array();
@@ -130,7 +130,7 @@ class Rotation {
         $i = 0;
 
         while($i < $this->totalWaves - 2) {
-            $this->generateData($this->start);
+            $this->buildWaves($this->start);
 
             array_push($this->data, $this->temp);
 

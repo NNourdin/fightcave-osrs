@@ -36,8 +36,6 @@ $('#second-wave').change(function() {
 
     if(value == 'extra')
         $('#extra-question').show();
-
-    //$('#predict').prop('disabled', false);
 });
 
 $('#show-monsters').change(function() {
@@ -75,12 +73,7 @@ $('#predict').on('click', function(e) {
     }
 
     gameState = false;
-
-    $('.c').empty();
-    $('.s').empty();
-    $('.se').empty();
-    $('.sw').empty();
-    $('.nw').empty();
+    clean();
 
     $('#current-wave').html('N/A');
 
@@ -107,8 +100,7 @@ $('#predict').on('click', function(e) {
 
                 $.each(gamePrediction[currentWave - 3][0]['Enemies'], function(i, monster) {
                     $('#current-wave').html(currentWave);
-                    $('.' + monster.Location).html(monster.Level);
-                    $('.' + monster.Location).append('<img class="monster img-fluid" src="images/monsters/' + monster.Name + '.png" alt="' + monster.Name + '" />');
+                    $('.' + monster.Location).append('<div class="monster-wrapper">' + monster.Level + '<img class="monster img-fluid" src="images/monsters/' + monster.Name + '.png" alt="' + monster.Name + '" /></div>');
 
                     if(!showMonsters)
                         $('.monster').hide();
@@ -135,18 +127,27 @@ function getWave(wave) {
     if(wave > currentWave)
         currentWave ++;
 
-    $('.c').empty();
-    $('.s').empty();
-    $('.se').empty();
-    $('.sw').empty();
-    $('.nw').empty();
+    clean();
 
     $.each(gamePrediction[wave - 3][0]['Enemies'], function(i, monster) {
         $('#current-wave').html(currentWave);
-        $('.' + monster.Location).html(monster.Level);
-        $('.' + monster.Location).append('<img class="monster img-fluid" src="images/monsters/' + monster.Name + '.png" alt="' + monster.Name + '" />');
+
+        if($('.' + monster.Location).has('.monster-wrapper').length > 0)
+            $('.' + monster.Location).addClass('multi');
+
+        $('.' + monster.Location).append('<div class="monster-wrapper">' +
+                                         '' + monster.Level + '<img class="monster img-fluid" src="images/monsters/' + monster.Name + '.png" alt="' + monster.Name + '" />' +
+                                         '</div>');
 
         if(!showMonsters)
             $('.monster').hide();
     });
+}
+
+function clean() {
+    $('.c').empty().removeClass('multi');
+    $('.s').empty().removeClass('multi');
+    $('.se').empty().removeClass('multi');
+    $('.sw').empty().removeClass('multi');
+    $('.nw').empty().removeClass('multi');
 }
